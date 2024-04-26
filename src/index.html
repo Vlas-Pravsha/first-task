@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Textures</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <canvas class="webgl"></canvas>
+    <script type="module" src="./script.js"></script>
+    <div class="wrapper">
+      <form action="submit" class="form">
+        <h2 class="form__title">First Task</h2>
+        <div class="form__inputs">
+          <label class="form__label">
+            X:
+            <input type="number" class="form__input" value="4" id="x" />
+          </label>
+          <label class="form__label">
+            Y:
+            <input type="number" class="form__input" value="4" id="y" />
+          </label>
+          <label class="form__label">
+            Z:
+            <input type="number" class="form__input" value="4" id="z" />
+          </label>
+        </div>
+        <button class="form__button" id="generate" type="submit">
+          Genereta
+        </button>
+      </form>
+      <button class="form__button" id="explode">Explode</button>
+    </div>
+  </body>
+</html>
