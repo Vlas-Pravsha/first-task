@@ -19,19 +19,20 @@ const materials = [
   new THREE.MeshBasicMaterial({
     map: new THREE.TextureLoader().load("/textures/earth/aerial_rock_4k.jpg"),
   }),
-
   new THREE.MeshBasicMaterial({
     map: new THREE.TextureLoader().load("/textures/fire/fire.jpg"),
   }),
-
   new THREE.MeshBasicMaterial({
     map: new THREE.TextureLoader().load("/textures/water/water.jpg"),
   }),
-
   new THREE.MeshBasicMaterial({
     map: new THREE.TextureLoader().load("/textures/snow/snow_diff_4k.jpg"),
   }),
 ];
+
+materials.forEach((material) => {
+  material.colorSpace = THREE.SRGBColorSpace;
+});
 
 const sizes = {
   width: window.innerWidth,
