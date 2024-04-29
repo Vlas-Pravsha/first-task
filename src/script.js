@@ -116,7 +116,7 @@ assembleBtn.addEventListener("click", () => {
   for (let mesh of meshArray) {
     gsap.to(mesh.position, {
       duration: 1,
-      delay: 0.3,
+      delay: 0,
       x: mesh.userData.initialPosition.x,
       y: mesh.userData.initialPosition.y,
       z: mesh.userData.initialPosition.z,
