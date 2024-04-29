@@ -17,7 +17,7 @@ const geometries = [
 
 const materials = [
   new THREE.MeshBasicMaterial({
-    map: new THREE.TextureLoader().load("/textures/earth/aerial_rock_4k.jpg"),
+    map: new THREE.TextureLoader().load("/textures/stone/stone.jpg"),
   }),
   new THREE.MeshBasicMaterial({
     map: new THREE.TextureLoader().load("/textures/fire/fire.jpg"),
@@ -26,7 +26,7 @@ const materials = [
     map: new THREE.TextureLoader().load("/textures/water/water.jpg"),
   }),
   new THREE.MeshBasicMaterial({
-    map: new THREE.TextureLoader().load("/textures/snow/snow_diff_4k.jpg"),
+    map: new THREE.TextureLoader().load("/textures/snow/snow.jpg"),
   }),
 ];
 
@@ -43,13 +43,14 @@ const meshArray = [];
 
 const generateBtn = document.getElementById("generate");
 const explodeBtn = document.getElementById("explode");
+const assembleBtn = document.getElementById("assemble");
+assembleBtn.style.display = "none";
 
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height);
 camera.position.z = 10;
 scene.add(camera);
 
 const controls = new OrbitControls(camera, canvas);
-controls.enableDamping = true;
 
 window.addEventListener("resize", () => {
   sizes.width = window.innerWidth;
@@ -85,6 +86,7 @@ generateBtn.addEventListener("click", (event) => {
         const mesh = new THREE.Mesh(geometry, material);
 
         mesh.position.set(i - x / 2 + 0.5, j - y / 2 + 0.5, k - z / 2 + 0.5);
+        mesh.userData.initialPosition = mesh.position.clone();
 
         scene.add(mesh);
         meshArray.push(mesh);
@@ -105,6 +107,23 @@ explodeBtn.addEventListener("click", () => {
     });
 
     scene.add(mesh);
+    explodeBtn.style.display = "none";
+    assembleBtn.style.display = "block";
+  }
+});
+
+assembleBtn.addEventListener("click", () => {
+  for (let mesh of meshArray) {
+    gsap.to(mesh.position, {
+      duration: 1,
+      delay: 0.3,
+      x: mesh.userData.initialPosition.x,
+      y: mesh.userData.initialPosition.y,
+      z: mesh.userData.initialPosition.z,
+    });
+    scene.add(mesh);
+    assembleBtn.style.display = "none";
+    explodeBtn.style.display = "block";
   }
 });
 
